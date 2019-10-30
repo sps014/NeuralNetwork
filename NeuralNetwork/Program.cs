@@ -10,7 +10,7 @@ namespace NeuralNetwork
 {
     static class Program
     {
-        static LinearRegression<double> lr = new LinearRegression<double>();
+        static LogisticRegression<double> lr = new LogisticRegression<double>();
 
         static void Main()
         {
@@ -27,21 +27,24 @@ namespace NeuralNetwork
             for (int i = 0; i < 90; i++)
             {
                 input.Add(i / 100.0f);
-                output.Add((i / 100f) * 100+2);
+                if (i > 50)
+                    output.Add(0);
+                else
+                    output.Add(1);
             }
             int a = 5;
             for (int i = 0; i < 3000; i++)
             {
                 lr.Train(input.ToArray(), output.ToArray(),
-                    new LinearRegression<double>.RegressionConfig()
+                    new LogisticRegression<double>.RegressionConfig()
                     {
-                        Optimizer = LinearRegression<double>.OPTIMIZER.STOCHASTIC_GRADIENT_DESCENT,
+                        Optimizer = LogisticRegression<double>.OPTIMIZER.STOCHASTIC_GRADIENT_DESCENT,
                         Epochs = 10,
                         Shuffle = true
                     }) ;
             }
 
-            MessageBox.Show("p(0.99)="+lr.Predict(0.99).ToString()+"\r\nm="+lr.Slope+"\r\nb="+lr.Bias);
+            MessageBox.Show("p(0.99)="+lr.Predict(0.1).ToString()+"\r\nm="+lr.Slope+"\r\nb="+lr.Bias);
 
         }
 

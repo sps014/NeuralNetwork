@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace Sonic.ML.Regression
 {
-    public class LinearRegression<T>
+    public class LogisticRegression<T>
     {
         public double LearningRate { get; set; } = 0.0001;
         public double Slope { get; private set; } =new Random().NextDouble();
@@ -11,7 +11,11 @@ namespace Sonic.ML.Regression
 
         public double Predict(T input)
         {
-            return Slope * (dynamic)input + Bias;
+            return Sigmoid(Slope * (dynamic)input + Bias);
+        }
+        private double Sigmoid(T input)
+        {
+            return 1 / (1.0 + System.Math.Exp(-(double)(dynamic)input));
         }
         public void Train(T[] inputData, T[] knownOutputs,RegressionConfig config=null)
         {
