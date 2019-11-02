@@ -1,8 +1,8 @@
-C:\Users\shive\source\repos\NeuralNetwork\NeuralNetwork\bin\Debug\NeuralNetwork.exe.config
-C:\Users\shive\source\repos\NeuralNetwork\NeuralNetwork\bin\Debug\NeuralNetwork.exe
-C:\Users\shive\source\repos\NeuralNetwork\NeuralNetwork\bin\Debug\NeuralNetwork.pdb
 C:\Users\shive\source\repos\NeuralNetwork\NeuralNetwork\obj\Debug\NeuralNetwork.csprojAssemblyReference.cache
-C:\Users\shive\source\repos\NeuralNetwork\NeuralNetwork\obj\Debug\NeuralNetwork.Properties.Resources.resources
 C:\Users\shive\source\repos\NeuralNetwork\NeuralNetwork\obj\Debug\NeuralNetwork.csproj.GenerateResource.cache
-C:\Users\shive\source\repos\NeuralNetwork\NeuralNetwork\obj\Debug\NeuralNetwork.exe
-C:\Users\shive\source\repos\NeuralNetwork\NeuralNetwork\obj\Debug\NeuralNetwork.pdb
+C:\Users\shive\source\repos\NeuralNetwork\NeuralNetwork\bin\Debug\mltest.exe.config
+C:\Users\shive\source\repos\NeuralNetwork\NeuralNetwork\bin\Debug\mltest.exe
+C:\Users\shive\source\repos\NeuralNetwork\NeuralNetwork\bin\Debug\mltest.pdb
+C:\Users\shive\source\repos\NeuralNetwork\NeuralNetwork\obj\Debug\mltest.Properties.Resources.resources
+C:\Users\shive\source\repos\NeuralNetwork\NeuralNetwork\obj\Debug\mltest.exe
+C:\Users\shive\source\repos\NeuralNetwork\NeuralNetwork\obj\Debug\mltest.pdb

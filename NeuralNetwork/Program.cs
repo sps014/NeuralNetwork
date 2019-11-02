@@ -1,4 +1,4 @@
-﻿using Sonic.ML.Regression;
+﻿using Sonic.ML;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -6,46 +6,42 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace NeuralNetwork
+namespace mltest
 {
     static class Program
     {
-        static PolynomialRegression<double> lr = new PolynomialRegression<double>(2);
-
+        static NeuralNetwork network = new NeuralNetwork(new uint []{ 1, 2, 1 });
         static void Main()
         {
             Console.ForegroundColor= ConsoleColor.Yellow;
             read();
+            Console.ReadKey();
         }
         static void read()
         {
             List<double> input = new List<double>();
             List<double> output = new List<double>();
             //lr.OnTraining += (sender, e) => { 
-               // string Text = e.Loss.ToString() + "  ->> ";
-               // Console.WriteLine(Text);
+            // string Text = e.Loss.ToString() + "  ->> ";
+            // Console.WriteLine(Text);
             //};
-            for (int i = 0; i < 90; i++)
-            {
-                input.Add(i / 100.0f);
-                output.Add(input[i]*input[i]);
 
-              
+            for (int j = 0; j < 1000; j++)
+            {
+                for (int i = 1; i <= 100; i++)
+                {
+                    input.Add(i / 100.0f);
+                    if (i < 50)
+                        output.Add(0);
+                    else
+                        output.Add(1);
+                    network.Train(new double[] { input.Last() }, new double[] { output.Last() });
+                    Console.WriteLine(network.Predict(new double[] { 0.045 })[0,0]);
+
+                }
             }
 
-            for (int i = 0; i < 1000; i++)
-            {
-                lr.Train(input.ToArray(), output.ToArray(),
-                    new PolynomialRegression<double>.RegressionConfig()
-                    {
-                        Optimizer = PolynomialRegression<double>.OPTIMIZER.STOCHASTIC_GRADIENT_DESCENT,
-                        Epochs = 10,
-                        Shuffle = true
-                    }) ;
-            }
-
-            MessageBox.Show("p(4)="+lr.Predict(0.6).ToString()+"\r\nanswer should be =0.36");
-
+            network.Predict(new double[] { 0.045}).Print();
         }
 
     }

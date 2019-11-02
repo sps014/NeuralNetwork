@@ -450,6 +450,30 @@ namespace Sonic.Math
 
             return c;
         }
+        public static Matrix<T> fromArray(T[] array, bool rowVector = true)
+        {
+            Matrix<T> c;
+
+            if (rowVector)
+            {
+                c = new Matrix<T>(array.Length, 1);
+                Parallel.For(0, array.Length, (i) =>
+                {
+                    c[i, 0] = array[i];
+                });
+            }
+            else
+            {
+                c = new Matrix<T>(1, array.Length);
+                Parallel.For(0, array.Length, (i) =>
+                {
+                    c[0, i] = array[i];
+                });
+            }
+
+            return c;
+        }
+
         public void CopyTo(Matrix<T> Target)
         {
             Target.Rows = Rows;

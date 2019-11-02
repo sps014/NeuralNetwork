@@ -5,11 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Sonic.AI
+namespace Sonic.ML
 {
     public class NeuralNetwork
     {
-        public float LearningRate { get; set; } = 0.000001f;
+        public float LearningRate { get; set; } = 0.1f;
         public List<Layer> Layers { get; set; }
 
         public NeuralNetwork(uint[] Dimensions)
@@ -82,7 +82,7 @@ namespace Sonic.AI
                 Layers[i].NeuronValue =Layers[i - 1].Weights* Layers[i - 1].NeuronValue;
             }
 
-            return Layers[Layers.Count - 1].NeuronValue;
+            return Layers.Last().NeuronValue;
         }
 
         private double Sigmoid(double x)
@@ -110,24 +110,23 @@ namespace Sonic.AI
             gradient.HadamardProduct(error);
             gradient *= LearningRate;
 
-            var hidden_wt_delta = Matrix<double>.Multiply(gradient, Layers[Layers.Count - 2].NeuronValue);
+            var hidden_wt_delta = Matrix<double>.Multiply(gradient, Matrix<double>.Transpose(Layers[Layers.Count - 2].NeuronValue));
 
 
-            Layers[Layers.Count - 2].Weights += hidden_wt_delta.Transpose();
+            Layers[Layers.Count - 2].Weights += hidden_wt_delta;
 
             //Layers[Layers.Count-2].Weights.Print();
 
             var prevError = error;
             for(int i=Layers.Count-2;i>0;i--)
             {
-                var hidden_error = Matrix<double>.Multiply(Layers[i].Weights, prevError);
+                var hidden_error = Matrix<double>.Multiply(Matrix<double>.Transpose(Layers[i].Weights), prevError);
                 prevError = hidden_error;
-                gradient = Matrix<double>.Map(Layers[i].NeuronValue, Dsigmoid).Transpose();
+                gradient = Matrix<double>.Map(Layers[i].NeuronValue, Dsigmoid);
                 gradient.HadamardProduct(hidden_error);
                 gradient *= LearningRate;
 
-                hidden_wt_delta = Matrix<double>.Multiply(gradient, Layers[i - 1].NeuronValue);
-                hidden_wt_delta.Transpose();
+                hidden_wt_delta = Matrix<double>.Multiply(gradient, Matrix<double>.Transpose(Layers[i - 1].NeuronValue));
                 Layers[i - 1].Weights += hidden_wt_delta;
             }
 

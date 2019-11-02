@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Sonic.AI
+namespace Sonic.ML
 {
     public class Layer
     {
@@ -18,7 +18,7 @@ namespace Sonic.AI
         public Layer(uint size, Layer prevLayer=null)
         {
             Size = size;
-            NeuronValue = new Math.Matrix<double>(size,1);
+            NeuronValue = new Math.Matrix<double>(size,size);
             PrevLayer = prevLayer;
         }
 
