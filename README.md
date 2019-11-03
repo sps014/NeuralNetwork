@@ -1,9 +1,9 @@
 # Neural-Network
  
  ### Added
- Linear Regression
- Logistic Regression
- Polynomial Regression
+ 1. Linear Regression
+ 2. Logistic Regression
+ 3 .Polynomial Regression
  
 ### Work in progress
-Neural Network
+4. Neural Network
