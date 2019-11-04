@@ -50,7 +50,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Layer.cs" />
-    <Compile Include="NNet.cs" />
     <Compile Include="PolynomialRegression.cs" />
     <Compile Include="LogisticRegression.cs" />
     <Compile Include="LinearRegression.cs" />
