@@ -1,4 +1,5 @@
 ﻿using Sonic.ML;
+using Sonic.ML.Regression;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -10,7 +11,7 @@ namespace mltest
 {
     static class Program
     {
-        static NeuralNetwork network = new NeuralNetwork(new uint []{ 1, 2, 1 });
+        static NeuralNetwork net = new NeuralNetwork(new int[] { 1, 2, 1 }, new string[] { "sigmoid", "sigmoid", "sigmoid" });
         static void Main()
         {
             Console.ForegroundColor= ConsoleColor.Yellow;
@@ -21,27 +22,28 @@ namespace mltest
         {
             List<double> input = new List<double>();
             List<double> output = new List<double>();
+
+            for (int i = 0; i < 100; i++)
+            {
+                input.Add(i/100f);
+                output.Add(i<50?0:1);
+            }
+
             //lr.OnTraining += (sender, e) => { 
             // string Text = e.Loss.ToString() + "  ->> ";
             // Console.WriteLine(Text);
             //};
 
-            for (int j = 0; j < 1000; j++)
+            for(int i=0;i<10000;i++)
             {
-                for (int i = 1; i <= 100; i++)
+                for (int j = 0; j < input.Count; j++)
                 {
-                    input.Add(i / 100.0f);
-                    if (i < 50)
-                        output.Add(0);
-                    else
-                        output.Add(1);
-                    network.Train(new double[] { input.Last() }, new double[] { output.Last() });
-                    Console.WriteLine(network.Predict(new double[] { 0.045 })[0,0]);
-
+                    net.BackPropagate(new float[] { (float)input[j] }, new float[] { (float)output[j] });
                 }
             }
+         
 
-            network.Predict(new double[] { 0.045}).Print();
+            Console.WriteLine(net.FeedForward(new float[] { 1 })[0]);
         }
 
     }
