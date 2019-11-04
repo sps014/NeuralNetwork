@@ -4,6 +4,6 @@
  1. Linear Regression
  2. Logistic Regression
  3. Polynomial Regression
- 
-### Work in progress
-4. Neural Network
+ 4. Neural Network
+
+# Special Thanks to kipgparker.
