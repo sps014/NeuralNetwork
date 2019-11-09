@@ -45,11 +45,15 @@ namespace Sonic.ML.Regression
             }
            
         }
+        private double DSigmoid(T data)
+        {
+            return Predict(data) * (1.0-Predict(data));
+        }
         void SGD(T[] inputData, T[] knownOutputs)
         {
             Parallel.For(0, inputData.Length,(i)=>
             {
-                double delta_m= inputData[i] * ((dynamic)knownOutputs[i] - Predict(inputData[i]));
+                double delta_m= inputData[i] * ((dynamic)knownOutputs[i] - Predict(inputData[i]))*DSigmoid((inputData[i]));
                 double delta_c = ((dynamic)knownOutputs[i] - Predict(inputData[i]));
                 Slope += delta_m * LearningRate;
                 Bias += delta_c * LearningRate;
@@ -67,7 +71,7 @@ namespace Sonic.ML.Regression
             double delta_c = 0;
             Parallel.For(0, inputData.Length, (i) =>
              {
-                 delta_m += inputData[i] * ((dynamic)knownOutputs[i] - Predict(inputData[i]));
+                 delta_m += inputData[i] * ((dynamic)knownOutputs[i] - Predict(inputData[i])) * DSigmoid(inputData[i]);
                  delta_c += ((dynamic)knownOutputs[i] - Predict(inputData[i]));
 
                  if (OnTraining != null)

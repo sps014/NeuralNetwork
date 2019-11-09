@@ -11,7 +11,8 @@ namespace mltest
 {
     static class Program
     {
-        static NeuralNetwork net = new NeuralNetwork(new int[] { 1, 2, 1 }, new string[] { "sigmoid", "sigmoid", "sigmoid" });
+        static MutatingNetwork net = new MutatingNetwork(new uint[] {1,2,1 });
+        static LogisticRegression<double> lr = new LogisticRegression<double>();
         static void Main()
         {
             Console.ForegroundColor= ConsoleColor.Yellow;
@@ -25,8 +26,8 @@ namespace mltest
 
             for (int i = 0; i < 100; i++)
             {
-                input.Add(i/100f);
-                output.Add(i<50?0:1);
+                input.Add(i/100.0);
+                output.Add(((i/100.0)>0.50)?0:1);
             }
 
             //lr.OnTraining += (sender, e) => { 
@@ -36,14 +37,12 @@ namespace mltest
 
             for(int i=0;i<10000;i++)
             {
-                for (int j = 0; j < input.Count; j++)
-                {
-                    net.BackPropagate(new float[] { (float)input[j] }, new float[] { (float)output[j] });
-                }
+                lr.Train(input.ToArray(), output.ToArray(),new LogisticRegression<double>.RegressionConfig() { Shuffle=true });
+                
             }
          
 
-            Console.WriteLine(net.FeedForward(new float[] { 1 })[0]);
+            MessageBox.Show(lr.Predict(0.6).ToString());
         }
 
     }

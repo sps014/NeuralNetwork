@@ -14,11 +14,13 @@ namespace Sonic.ML
         public Math.Matrix<double> Weights { get; set; } = new Math.Matrix<double>();
 
         public Math.Matrix<double> NeuronValue { get; set; } = new Math.Matrix<double>();
+        public Math.Matrix<double> Bias { get; set; } = new Math.Matrix<double>();
 
         public Layer(uint size, Layer prevLayer=null)
         {
             Size = size;
-            NeuronValue = new Math.Matrix<double>(size,size);
+            NeuronValue = new Math.Matrix<double>(size,1);
+            Bias = new Math.Matrix<double>(size, 1);
             PrevLayer = prevLayer;
         }
 

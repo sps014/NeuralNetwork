@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Layer.cs" />
+    <Compile Include="MutatingNet.cs" />
     <Compile Include="PolynomialRegression.cs" />
     <Compile Include="LogisticRegression.cs" />
     <Compile Include="LinearRegression.cs" />
