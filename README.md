@@ -6,4 +6,4 @@
  3. Polynomial Regression
  4. Neural Network
 
-# Special Thanks to kipgparker.
+
