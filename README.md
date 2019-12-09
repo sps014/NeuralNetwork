@@ -1,4 +1,5 @@
 # Neural-Network
+ CPU Accelerated Algorithms.
  
  ### Added
  1. Linear Regression
